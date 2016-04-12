@@ -28,3 +28,10 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'actived' => mt_rand(0,1),
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'actived' => mt_rand(0,1),
+    ];
+});
