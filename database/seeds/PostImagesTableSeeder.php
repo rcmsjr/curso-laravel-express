@@ -5,6 +5,9 @@ use App\PostImage;
 
 class PostImagesTableSeeder extends Seeder
 {
+    private $order;
+
+
     /**
      * Run the database seeds.
      *
@@ -17,9 +20,13 @@ class PostImagesTableSeeder extends Seeder
     
     public function runRelationship($postId)
     {
-        PostImage::truncate();
-        
+        $this->order = 1;
         $totalImages = mt_rand(0, 8);
-        factory(PostImage::class, $totalImages)->create(['post_id' => $postId]);
+        factory(PostImage::class, $totalImages)->create(['post_id' => $postId])->each(function($postImage) {
+            $postImage->order = $this->order;
+            $postImage->save();
+            
+            $this->order++;
+        });
     }
 }

@@ -12,6 +12,8 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Comment::truncate();
+        \App\PostImage::truncate();
         Post::truncate();
 
         factory(Post::class, 15)->create()->each(function($post) {

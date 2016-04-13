@@ -17,8 +17,6 @@ class CommentsTableSeeder extends Seeder
     
     public function runRelationship($postId)
     {
-        Comment::truncate();
-        
         $totalComments = mt_rand(0, 10);
         factory(Comment::class, $totalComments)->create(['post_id' => $postId]);
     }
