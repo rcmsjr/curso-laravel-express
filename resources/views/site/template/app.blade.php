@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Laravel Express</title>
 
-        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('/assets/vendor/bootstrap/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('/assets/site/css/main.css') }}" rel="stylesheet">
 
         <!-- Fonts -->
         <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -29,7 +30,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Blog Express</a>
+                    <span class="navbar-brand" href="/">Blog Express</span>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -40,7 +41,7 @@
                             <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a> 
                             <ul class="dropdown-menu" aria-labelledby="drop1">
                                 @foreach($categories as $category)
-                                    <li><a href="#">{{ $category }}</a></li>
+                                    <li><a href="/category/{{ $category->id }}">{{ ucfirst($category->name) }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
@@ -59,14 +60,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                            <h3><a href="#">Home</a></h3>
+                            <h3><a href="/">Home</a></h3>
                         </div>
                         @if(count($categories))
                         <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                             <h3>Categories</h3>
                             <ul>
                                 @foreach($categories as $category)
-                                    <li><a href="#">{{ $category }}</a></li>
+                                    <li><a href="/category/{{ $category->id }}">{{ ucfirst($category->name) }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -74,11 +75,11 @@
                         <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 pull-right">
                             <h3>Social</h3>
                             <ul class="social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li class="facebook"><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li>
+                                <li class="twitter"><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
+                                <li class="pinterest"><a href="#"><i class="fa fa-pinterest fa-2x"></i></a></li>
+                                <li class="youtube"><a href="#"><i class="fa fa-youtube fa-2x"></i></a></li>
+                                <li class="google-plus"><a href="#"><i class="fa fa-google-plus fa-2x"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -99,5 +100,13 @@
         <!-- Scripts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+        <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $('.section_posts').masonry();
+            });
+        </script>
     </body>
 </html>

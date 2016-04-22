@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',  ['as' => 'home', 'uses' => 'SiteController@home']);
 
-Route::get('/home', 'SiteController@home');
+Route::get('/category/{id}',  ['uses' => 'SiteController@postsByCategory'])->where(['id' => '[0-9]+']);

@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
+use App\Category;
 use App\Post;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-    public function __construct() {
-        $categories = [
-            0 => 'Category 1',
-            1 => 'Category 2',
-            2 => 'Category 3',
-            3 => 'Category 4',
-            4 => 'Category 5',
-        ];
+    public function __construct(Category $category) {
+        $categories = $category->where('actived', 1)->orderBy('name', 'ASC')->get();
         
         /**
          * Sharing global variable for all methods and views
@@ -27,6 +22,16 @@ class SiteController extends Controller
     {
         $posts = $post->where('actived', 1)->orderBy('created_at', 'DESC')->limit(8)->get();
         
-        return view('home', compact('posts'));
+        return view('site.home', compact('posts'));
+    }
+
+    public function postsByCategory($id, Post $post, Category $category)
+    {
+        $category = $category->find($id);
+
+        // geting post by category and paginating with 8 items by page
+        $posts = $post->where('category_id', $id)->where('actived', 1)->orderBy('created_at', 'DESC')->paginate(8);
+
+        return view('site.category', compact('posts', 'category'));
     }
 }

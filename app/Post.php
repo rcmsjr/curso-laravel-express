@@ -11,6 +11,9 @@ class Post extends Model
     public function category() {
         return $this->belongsTo(\App\Category::class);
     }
+    public function author() {
+        return $this->belongsTo(\App\Author::class);
+    }
     
     public function comments() {
         return $this->hasMany(\App\Comment::class);
@@ -22,5 +25,10 @@ class Post extends Model
     
     public function tags() {
         return $this->belongsToMany(\App\Tag::class, 'posts_tags');
+    }
+
+    public function getDatePostedAttribute()
+    {
+        return $this->created_at->format('d/m/Y H:i');
     }
 }
