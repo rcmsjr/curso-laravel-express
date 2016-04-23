@@ -4,7 +4,7 @@
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
-        <li class="active">{{ ucfirst($category->name) }}</li>
+        <li class="active">Category</li>
     </ol>
 
     <div class="page-header">
