@@ -34,4 +34,11 @@ class SiteController extends Controller
 
         return view('site.category', compact('posts', 'category'));
     }
+
+    public function post($id, Post $post)
+    {
+        $post = $post->findOrFail($id);
+
+        return view('site.post', compact('post'));
+    }
 }

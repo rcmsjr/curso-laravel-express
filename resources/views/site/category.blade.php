@@ -24,7 +24,7 @@
                         <h3>{{ $post->title }}</h3>
                         <h6 class="text-right">by {{ ucfirst($post->author->name) }}</h6>
                         <p>{{ $post->description }}</p>
-                        <p><a href="#{{ $post->id }}" class="btn btn-default" role="button">Learn more</a></p>
+                        <p><a href="/post/{{ $post->id }}" class="btn btn-default" role="button">Learn more</a></p>
                     </div>
                 </div>
             </div>
@@ -41,4 +41,8 @@
     </div>
 
 </div>
+@endsection
+
+@section('documentReadyContinue')
+    $('.section_posts').masonry();
 @endsection

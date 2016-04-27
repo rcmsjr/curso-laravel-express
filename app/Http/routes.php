@@ -14,3 +14,4 @@
 Route::get('/',  ['as' => 'home', 'uses' => 'SiteController@home']);
 
 Route::get('/category/{id}',  ['uses' => 'SiteController@postsByCategory'])->where(['id' => '[0-9]+']);
+Route::get('/post/{id}',  ['uses' => 'SiteController@post'])->where(['id' => '[0-9]+']);

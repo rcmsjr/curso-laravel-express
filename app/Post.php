@@ -16,11 +16,11 @@ class Post extends Model
     }
     
     public function comments() {
-        return $this->hasMany(\App\Comment::class);
+        return $this->hasMany(\App\Comment::class)->orderBy('created_at', 'desc');
     }
     
     public function images() {
-        return $this->hasMany(\App\PostImage::class);
+        return $this->hasMany(\App\PostImage::class)->orderBy('order');
     }
     
     public function tags() {

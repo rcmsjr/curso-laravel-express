@@ -13,6 +13,8 @@
         <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
+        @yield('stylesheetContinue')
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -79,7 +81,7 @@
                                 <li class="twitter"><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
                                 <li class="pinterest"><a href="#"><i class="fa fa-pinterest fa-2x"></i></a></li>
                                 <li class="youtube"><a href="#"><i class="fa fa-youtube fa-2x"></i></a></li>
-                                <li class="google-plus"><a href="#"><i class="fa fa-google-plus fa-2x"></i></a></li>
+                                <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -103,9 +105,11 @@
 
         <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
 
+        @yield('scriptContinue')
+
         <script>
             $(document).ready(function(){
-                $('.section_posts').masonry();
+                @yield('documentReadyContinue')
             });
         </script>
     </body>

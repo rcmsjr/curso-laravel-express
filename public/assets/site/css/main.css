@@ -1,3 +1,23 @@
+.no-padding {
+    padding: 0px;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.hr-line-dashed {
+    border-top: 1px dashed #e7eaec;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
 
 /*** -- Custom Template -- ***/
 
@@ -8,6 +28,62 @@ body { padding-top: 70px; }
 .section_posts .post-thumbnail { display: block; height: 200px; width: 100%; }
 
 .pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
+
+.post-author { margin-top: -5px !important; }
+
+.section-post-comments .panel {
+    position:relative;
+}
+.section-post-comments .panel>.panel-heading:after,.panel>.panel-heading:before{
+    position:absolute;
+    top:11px;left:-16px;
+    right:100%;
+    width:0;
+    height:0;
+    display:block;
+    content:" ";
+    border-color:transparent;
+    border-style:solid solid outset;
+    pointer-events:none;
+}
+.section-post-comments .panel>.panel-heading:after{
+    border-width:7px;
+    border-right-color:#f7f7f7;
+    margin-top:1px;
+    margin-left:2px;
+}
+.section-post-comments .panel>.panel-heading:before{
+    border-right-color:#ddd;
+    border-width:8px;
+}
+
+
+.section-post-comment-form {
+    background: none repeat scroll 0 0 #f5f5f5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    -ms-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    -o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    margin: 30px 0;
+    padding: 15px 0 0;
+    position: relative;
+}
+.section-post-comment-form::after, .section-post-comment-form .button-control::after {
+    clear: both;
+    content: ' ';
+    display: table;
+}
+
+.section-post-comment-form .button-control {
+    border-top: 1px dashed #e7eaec;
+    padding: 20px 15px 5px;
+}
 
 .footer {
     background: #EDEFF1;
