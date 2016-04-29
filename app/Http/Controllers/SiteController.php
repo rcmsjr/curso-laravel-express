@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Category;
 use App\Post;
+use App\Tag;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -25,14 +27,33 @@ class SiteController extends Controller
         return view('site.home', compact('posts'));
     }
 
-    public function postsByCategory($id, Post $post, Category $category)
+    public function postsByCategory($id, Category $category)
     {
         $category = $category->find($id);
 
         // geting post by category and paginating with 8 items by page
-        $posts = $post->where('category_id', $id)->where('actived', 1)->orderBy('created_at', 'DESC')->paginate(8);
+        $posts = $category->posts()->where('actived', 1)->orderBy('created_at', 'DESC')->paginate(8);
 
         return view('site.category', compact('posts', 'category'));
+    }
+
+    public function postsByTag($id, Tag $tag)
+    {
+        $tag = $tag->find($id);
+
+        // geting post by tag and paginating with 8 items by page
+        $posts = $tag->posts()->where('actived', 1)->orderBy('created_at', 'DESC')->paginate(8);
+
+        return view('site.tag', compact('posts', 'tag'));
+    }
+    public function postsByAuthor($id, Author $author)
+    {
+        $author = $author->find($id);
+
+        // geting post by tag and paginating with 8 items by page
+        $posts = $author->posts()->where('actived', 1)->orderBy('created_at', 'DESC')->paginate(8);
+
+        return view('site.author', compact('posts', 'author'));
     }
 
     public function post($id, Post $post)

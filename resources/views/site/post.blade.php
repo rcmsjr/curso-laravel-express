@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h3 class="post-author text-right"><small>by</small> {{ $post->author->name }}</h3>
+            <h3 class="post-author text-right"><small>by</small> <a href="/author/{{ $post->author->id }}">{{ $post->author->name }}</a></h3>
         </div>
         @if($post->images->count() > 0)
             <div class="col-md-6">
@@ -43,15 +43,16 @@
                 </div>
             </div>
         @endIf
-        <p>{{ $post->content }}</p>
+        <div class="{{ $post->images->count() > 0 ? 'col-md-6' : 'col-md-12' }}">
+            <p>{{ $post->content }}</p>
+            <hr>
 
-        <hr>
-
-        @if($post->tags->count() > 0)
-            @forelse($post->tags as $tag)
-                <a href="/tag/{{ $tag->id }}" class="label label-info">{{ ucfirst($tag->name) }}</a>
-            @endforeach
-        @endif
+            @if($post->tags->count() > 0)
+                @forelse($post->tags as $tag)
+                    <a href="/tag/{{ $tag->id }}" class="label label-info">{{ ucfirst($tag->name) }}</a>
+                @endforeach
+            @endif
+        </div>
 
     </div>
 
