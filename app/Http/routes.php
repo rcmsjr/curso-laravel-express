@@ -17,3 +17,5 @@ Route::get('/author/{id}',  ['uses' => 'SiteController@postsByAuthor'])->where([
 Route::get('/tag/{id}',  ['uses' => 'SiteController@postsByTag'])->where(['id' => '[0-9]+']);
 Route::get('/category/{id}',  ['uses' => 'SiteController@postsByCategory'])->where(['id' => '[0-9]+']);
 Route::get('/post/{id}',  ['uses' => 'SiteController@post'])->where(['id' => '[0-9]+']);
+
+Route::get('/authors',  ['uses' => 'SiteController@authors']);

@@ -11,13 +11,14 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-    public function __construct(Category $category) {
+    public function __construct(Category $category, Author $author) {
         $categories = $category->where('actived', 1)->orderBy('name', 'ASC')->get();
-        
+        $authors = $author->where('actived', 1)->orderBy('name', 'ASC')->get();
+
         /**
          * Sharing global variable for all methods and views
          */
-        view()->share('categories', $categories);
+        view()->share(['categories' => $categories, 'authors' => $authors]);
     }
     
     public function home(Post $post)
@@ -61,5 +62,12 @@ class SiteController extends Controller
         $post = $post->findOrFail($id);
 
         return view('site.post', compact('post'));
+    }
+
+    public function authors(Author $author)
+    {
+        $authors = $author->where('actived', 1)->orderBy('name', 'ASC')->get();
+
+        return view('site.authors', compact('authors'));
     }
 }

@@ -48,6 +48,7 @@
                             </ul>
                         </li>
                         @endIf
+                        <li><a href="{{ url('/authors') }}">Authors</a></li>
                     </ul>
 
                 </div>
@@ -74,7 +75,17 @@
                             </ul>
                         </div>
                         @endIf
-                        <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 pull-right">
+                        @if(count($authors))
+                        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                            <h3>Authors</h3>
+                            <ul>
+                                @foreach($authors as $author)
+                                    <li><a href="/author/{{ $author->id }}">{{ ucfirst($author->name) }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endIf
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-right">
                             <h3>Social</h3>
                             <ul class="social">
                                 <li class="facebook"><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li>
