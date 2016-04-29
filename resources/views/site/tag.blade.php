@@ -3,17 +3,22 @@
 @section('content')
 <div class="container">
     <ol class="breadcrumb">
-        <li class="active">Home</li>
+        <li><a href="/">Home</a></li>
+        <li class="active">Tag</li>
     </ol>
 
     <div class="page-header">
-        <h1>Latest <small>Posts</small></h1>
+        <h1>Posts <small> of {{ ucfirst($tag->name) }}</small></h1>
     </div>
 
     <div class="row section_posts">
 
         @include('site.inc.post')
 
+    </div>
+
+    <div class="row text-center">
+        {!! $posts->render() !!}
     </div>
 
 </div>
