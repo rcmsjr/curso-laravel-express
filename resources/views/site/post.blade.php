@@ -61,25 +61,32 @@
     </div>
 
     <div class="col-md-6 section-post-comment-form no-padding">
-        <form action="" method="post" name="form-post-comment" role="form">
+
+        <div class="col-md-12 alert-response">
+
+
+        </div>
+
+        {!! Form::open(['route' => ['post.comment.save', $post->id], 'method' => 'post', 'name' => 'form-post-comment', 'class' => 'form-ajax', 'role' => 'form']) !!}
+        {!! Form::hidden('post_id', $post->id) !!}
             <div class="form-group col-md-6">
-                <input type="text" class="form-control" placeholder="Name" required>
+                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name', 'required']) !!}
             </div>
             <div class="form-group col-md-6">
                 <div class="input-group">
-                    <input type="email" class="form-control" placeholder="E-mail" required aria-describedby="basic-addon2">
+                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail', 'required', 'aria-describedby' => 'basic-addon2']) !!}
                     <span class="input-group-addon" id="basic-addon2">@example.com</span>
                 </div>
             </div>
             <div class="form-group col-md-12">
-                <textarea class="form-control" rows="4" placeholder="What are you thinking right now?" required></textarea>
+                {!! Form::textarea('comment', null, ['class' => 'form-control', 'placeholder' => 'What are you thinking right now?', 'required', 'rows' => '4']) !!}
             </div>
             <div class="form-group col-md-12 button-control text-right">
                 <button type="reset" class="btn btn-warning"><i class="fa fa-eraser"></i> Erase</button>
                 &nbsp;
                 <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Publish</button>
             </div>
-        </form>
+        {!! Form::close() !!}
     </div><!-- Widget Area -->
 
     @if($post->comments->count() > 0)
@@ -104,4 +111,37 @@
 
 @section('documentReadyContinue')
     $('.carousel').carousel({interval: false});
+
+    $('.form-ajax').submit(function(e) {
+        e.preventDefault();
+        var $this = $(e.currentTarget);
+
+        $.ajax({
+            url        : $this.attr('action'),
+            method     : $this.attr('method'),
+            data       : $this.serialize(),
+            dataType   : 'json',
+            beforeSend : function() {
+                $('.alert-response').empty();
+            },
+            success    : function(data) {
+                console.log(data);
+                if(data.success) {
+                    $('.alert-response').html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Comment</strong> send with success!</div>');
+                    location.reload();
+                }
+            },
+            error      : function(a, b, c) {
+                if(b == 'error' && c == 'Unprocessable Entity' && a.status == 422) {
+                    var response = '';
+                    $.each(a.responseJSON, function(key, value) {
+                        response += "<li><strong>" + key + " = </strong>" + value + "</li>";
+                    })
+                    $('.alert-response').html('<div class="alert alert-danger" role="alert"><ul>' + response + '</ul></div>');
+                }
+            }
+        }).done(function(){
+            $this.find('button[type=reset]').trigger('click');
+        });
+    });
 @endsection

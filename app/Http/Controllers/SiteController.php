@@ -6,7 +6,7 @@ use App\Author;
 use App\Category;
 use App\Post;
 use App\Tag;
-use App\Http\Requests;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -69,5 +69,14 @@ class SiteController extends Controller
         $authors = $author->where('actived', 1)->orderBy('name', 'ASC')->get();
 
         return view('site.authors', compact('authors'));
+    }
+    
+    public function postCommentSave (CommentRequest $request, $id, Post $post)
+    {
+
+        $post = $post->findOrFail($id);
+        $post->comments()->create($request->all());
+
+        return response()->json(['success' => true]);
     }
 }

@@ -13,9 +13,9 @@
 
 Route::get('/',  ['as' => 'home', 'uses' => 'SiteController@home']);
 
-Route::get('/author/{id}',  ['uses' => 'SiteController@postsByAuthor'])->where(['id' => '[0-9]+']);
-Route::get('/tag/{id}',  ['uses' => 'SiteController@postsByTag'])->where(['id' => '[0-9]+']);
-Route::get('/category/{id}',  ['uses' => 'SiteController@postsByCategory'])->where(['id' => '[0-9]+']);
-Route::get('/post/{id}',  ['uses' => 'SiteController@post'])->where(['id' => '[0-9]+']);
-Route::get('/authors',  ['uses' => 'SiteController@authors']);
-Route::post('/post/comment/save',  ['uses' => 'SiteController@postCommentSave']);
+Route::get('/author/{id}',  ['as' => 'author', 'uses' => 'SiteController@postsByAuthor'])->where(['id' => '[0-9]+']);
+Route::get('/tag/{id}',  ['as' => 'tag', 'uses' => 'SiteController@postsByTag'])->where(['id' => '[0-9]+']);
+Route::get('/category/{id}',  ['as' => 'category', 'uses' => 'SiteController@postsByCategory'])->where(['id' => '[0-9]+']);
+Route::get('/post/{id}',  ['as' => 'post', 'uses' => 'SiteController@post'])->where(['id' => '[0-9]+']);
+Route::get('/authors',  ['as' => 'authors', 'uses' => 'SiteController@authors']);
+Route::post('/post/comment/save/{id}',  ['as' => 'post.comment.save', 'uses' => 'SiteController@postCommentSave'])->where(['id' => '[0-9]+']);
