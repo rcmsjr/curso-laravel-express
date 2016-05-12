@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Sys\Auth;
 
 use App\User;
 use Validator;
@@ -28,7 +28,10 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/admin/dashboard';
+    protected $redirectPath = '/admin/dashboard';
+    protected $redirectAfterLogout = '/admin/login';
+    protected $loginView = 'sys.auth.login';
 
     /**
      * Create a new authentication controller instance.
@@ -37,7 +40,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
     }
 
     /**

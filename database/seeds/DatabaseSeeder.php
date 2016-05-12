@@ -16,6 +16,15 @@ class DatabaseSeeder extends Seeder
 
         // Disable Foreign key check for this connection before running seeders
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        factory(App\User::class)->create(
+            [
+                'name' => 'Roberto Mariano',
+                'email' => 'rcmsjr@gmail.com',
+                'password' => bcrypt(123456),
+                'remember_token' => str_random(10),
+            ]
+        );
         
         $this->call(AuthorsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
