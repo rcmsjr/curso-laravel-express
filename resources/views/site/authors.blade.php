@@ -37,6 +37,13 @@
 </div>
 @endsection
 
-@section('documentReadyContinue')
-    $('.section_posts').masonry();
-@endsection
+@section('scripts')
+    @parent
+    <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.section_posts').masonry();
+        });
+    </script>
+@stop

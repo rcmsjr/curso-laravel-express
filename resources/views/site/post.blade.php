@@ -109,39 +109,44 @@
 </div>
 @endsection
 
-@section('documentReadyContinue')
-    $('.carousel').carousel({interval: false});
+@section('scripts')
+    @parent
+    <script>
+        $(document).ready(function(){
+            $('.carousel').carousel({interval: false});
 
-    $('.form-ajax').submit(function(e) {
-        e.preventDefault();
-        var $this = $(e.currentTarget);
+            $('.form-ajax').submit(function(e) {
+                e.preventDefault();
+                var $this = $(e.currentTarget);
 
-        $.ajax({
-            url        : $this.attr('action'),
-            method     : $this.attr('method'),
-            data       : $this.serialize(),
-            dataType   : 'json',
-            beforeSend : function() {
-                $('.alert-response').empty();
-            },
-            success    : function(data) {
-                console.log(data);
-                if(data.success) {
-                    $('.alert-response').html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Comment</strong> send with success!</div>');
-                    location.reload();
-                }
-            },
-            error      : function(a, b, c) {
-                if(b == 'error' && c == 'Unprocessable Entity' && a.status == 422) {
-                    var response = '';
-                    $.each(a.responseJSON, function(key, value) {
-                        response += "<li><strong>" + key + " = </strong>" + value + "</li>";
-                    })
-                    $('.alert-response').html('<div class="alert alert-danger" role="alert"><ul>' + response + '</ul></div>');
-                }
-            }
-        }).done(function(){
-            $this.find('button[type=reset]').trigger('click');
+                $.ajax({
+                    url        : $this.attr('action'),
+                    method     : $this.attr('method'),
+                    data       : $this.serialize(),
+                    dataType   : 'json',
+                    beforeSend : function() {
+                        $('.alert-response').empty();
+                    },
+                    success    : function(data) {
+                        console.log(data);
+                        if(data.success) {
+                            $('.alert-response').html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Comment</strong> send with success!</div>');
+                            location.reload();
+                        }
+                    },
+                    error      : function(a, b, c) {
+                        if(b == 'error' && c == 'Unprocessable Entity' && a.status == 422) {
+                            var response = '';
+                            $.each(a.responseJSON, function(key, value) {
+                                response += "<li><strong>" + key + " = </strong>" + value + "</li>";
+                            })
+                            $('.alert-response').html('<div class="alert alert-danger" role="alert"><ul>' + response + '</ul></div>');
+                        }
+                    }
+                }).done(function(){
+                    $this.find('button[type=reset]').trigger('click');
+                });
+            });
         });
-    });
+    </script>
 @endsection
