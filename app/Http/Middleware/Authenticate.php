@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class Authenticate
 {
+
+    protected $redirectNotLogged = '/admin/login';
+
     /**
      * Handle an incoming request.
      *
@@ -21,7 +24,8 @@ class Authenticate
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('login');
+                $redirectNotLogged = property_exists($this, 'redirectNotLogged') ? $this->redirectNotLogged : 'login';
+                return redirect()->guest($redirectNotLogged);
             }
         }
 
