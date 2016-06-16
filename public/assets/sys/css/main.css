@@ -1,0 +1,34 @@
+.no-padding {
+    padding: 0px;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.hr-line-dashed {
+    border-top: 1px dashed #e7eaec;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
+
+/*** -- Custom Template -- ***/
+
+#topnav .logo {
+    color: #435966 !important;
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 15px;
+    margin-top: 8px;
+}
+
+#topnav .logo span span {
+    color: #57c5a5 !important;
+}
